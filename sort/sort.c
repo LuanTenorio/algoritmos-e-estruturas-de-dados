@@ -12,12 +12,12 @@ int array[ARRAY_SIZE] = {7, 3, 9, 6, 5, 4};
 
 void bubbleSort(int * arr, int len){
 	int curIndex = 0;
-	int rightPosition = 0;
+	int rightPosition = 1;
 	int mov;
 
 	do {
 		mov = 0;
-		for(int i = 0; i < len - rightPosition -1; i++){
+		for(int i = 0; i < len - rightPosition; i++){
 			if(arr[i] > arr[i+1]){
 				int nextNumber = arr[i+1];
 				arr[i+1] = arr[i];
@@ -28,9 +28,39 @@ void bubbleSort(int * arr, int len){
 	}while(mov == 1);
 }
 
+void selectionSort(int * arr, int len){
+	int rightPosition = 1;
+	int biggerIndex = 0;
+	int mov;
+
+	do {
+		mov = 0;
+		biggerIndex = 0;
+		for(int i = 1; i <= len -rightPosition; i++){
+			printf("%d %d\n", arr[biggerIndex], arr[i]);
+			if(arr[biggerIndex] < arr[i]){
+				biggerIndex = i;
+			}
+		}
+
+		if(biggerIndex != len - rightPosition +1){
+			int lastNumber = arr[len - rightPosition];
+			arr[len - rightPosition++] = arr[biggerIndex];
+			arr[biggerIndex] = lastNumber;
+			mov = 1;
+		}
+		
+	}while(mov == 1);
+}
+
 int main(){
+
+	// showArray(finalTest, 30);
+	// bubbleSort(finalTest, 30);
+	// showArray(finalTest, 30);
+
 	showArray(finalTest, 30);
-	bubbleSort(finalTest, 30);
+	selectionSort(finalTest, 30);
 	showArray(finalTest, 30);
 	
 	return 0;
