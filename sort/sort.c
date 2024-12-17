@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
 #include "../preview/preview.c"
 #define ARRAY_SIZE 6
 
@@ -9,6 +11,34 @@ int finalTest[30] = {
 };
 
 int array[ARRAY_SIZE] = {7, 3, 9, 6, 5, 4};
+
+int arrayIsSorted(int *arr, int len){
+	for (size_t i = 0; i < len-1; i++)
+		if(arr[i] > arr[i+1]) 
+			return 0;
+	
+	return 1;
+}
+
+void populateRandomIntArray(int *arr, int len){
+	srand(time(NULL));
+	for (size_t i = 0; i < len; i++){
+		int random = rand() % 200;
+		arr[i] = random;
+	}
+}
+
+int testerSort(void(*sortAlgorithm)(int*, int)){
+	for(int i = 0; i < 20; i++){
+		int len = 10+i;
+		int arrayTest[len];
+	 	populateRandomIntArray(arrayTest, len);
+		sortAlgorithm(arrayTest, len);
+		if(!arrayIsSorted(arrayTest, len))
+			return 0;
+	}
+	return 1;
+}
 
 void bubbleSort(int * arr, int len){
 	int curIndex = 0;
@@ -37,7 +67,6 @@ void selectionSort(int * arr, int len){
 		mov = 0;
 		biggerIndex = 0;
 		for(int i = 1; i <= len -rightPosition; i++){
-			printf("%d %d\n", arr[biggerIndex], arr[i]);
 			if(arr[biggerIndex] < arr[i]){
 				biggerIndex = i;
 			}
@@ -49,20 +78,26 @@ void selectionSort(int * arr, int len){
 			arr[biggerIndex] = lastNumber;
 			mov = 1;
 		}
-		
 	}while(mov == 1);
+}
+
+void checkAllSort(){
+	if(testerSort(bubbleSort)){
+		printf("bubbleSort working\n");
+	}else{
+		printf("bubbleSort not working\n");
+	}
+
+	if(testerSort(selectionSort)){
+		printf("selectionSort working\n");
+	}else{
+		printf("selectionSort not working\n");
+	}
 }
 
 int main(){
 
-	// showArray(finalTest, 30);
-	// bubbleSort(finalTest, 30);
-	// showArray(finalTest, 30);
+	checkAllSort();	
 
-	showArray(finalTest, 30);
-	selectionSort(finalTest, 30);
-	showArray(finalTest, 30);
-	
 	return 0;
 }
-
