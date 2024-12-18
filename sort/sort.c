@@ -12,6 +12,12 @@ int finalTest[30] = {
 
 int array[ARRAY_SIZE] = {7, 3, 9, 6, 5, 4};
 
+void swap(int* a, int* b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 int arrayIsSorted(int *arr, int len){
 	for (size_t i = 0; i < len-1; i++)
 		if(arr[i] > arr[i+1]) 
@@ -34,6 +40,18 @@ int testerSort(void(*sortAlgorithm)(int*, int)){
 		int arrayTest[len];
 	 	populateRandomIntArray(arrayTest, len);
 		sortAlgorithm(arrayTest, len);
+		if(!arrayIsSorted(arrayTest, len))
+			return 0;
+	}
+	return 1;
+}
+
+int testerForRecursiveSort(void(*sortAlgorithm)(int*, int, int)){
+	for(int i = 0; i < 20; i++){
+		int len = 10+i;
+		int arrayTest[len];
+	 	populateRandomIntArray(arrayTest, len);
+		sortAlgorithm(arrayTest, 0, len);
 		if(!arrayIsSorted(arrayTest, len))
 			return 0;
 	}
@@ -81,6 +99,35 @@ void selectionSort(int * arr, int len){
 	}while(mov == 1);
 }
 
+int partition(int arr[], int low, int high) {
+    int pivot = arr[low];
+    int left = low;
+    int right = high;
+
+    while (left < right) {
+        while (arr[left] <= pivot && left <= high - 1) 
+            left++;
+
+        while (arr[right] > pivot && right >= low + 1) 
+            right--;
+		
+        if (left < right) 
+            swap(&arr[left], &arr[right]);
+    }
+
+    swap(&arr[low], &arr[right]);
+    return right;
+}
+
+void quickSort(int *arr, int low, int high) {
+    if (low < high) {
+        int pivot = partition(arr, low, high);
+
+        quickSort(arr, low, pivot - 1);
+        quickSort(arr, pivot + 1, high);
+    }
+}
+
 void checkAllSort(){
 	if(testerSort(bubbleSort)){
 		printf("bubbleSort working\n");
@@ -92,6 +139,12 @@ void checkAllSort(){
 		printf("selectionSort working\n");
 	}else{
 		printf("selectionSort not working\n");
+	}
+
+	if(testerForRecursiveSort(quickSort)){
+		printf("quickSort working\n");
+	}else{
+		printf("quickSort not working\n");
 	}
 }
 
