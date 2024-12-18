@@ -4,14 +4,6 @@
 #include "../preview/preview.c"
 #define ARRAY_SIZE 6
 
-int finalTest[30] = {
-    45, 12, 89, 32, 65, 71, 38, 24, 10, 99,
-    53, 62, 18, 77, 84, 7, 21, 49, 91, 36,
-    55, 43, 60, 74, 29, 3, 96, 81, 67, 40
-};
-
-int array[ARRAY_SIZE] = {7, 3, 9, 6, 5, 4};
-
 void swap(int* a, int* b) {
     int temp = *a;
     *a = *b;
