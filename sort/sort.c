@@ -67,9 +67,7 @@ void bubbleSort(int * arr, int len){
 		mov = 0;
 		for(int i = 0; i < len - rightPosition; i++){
 			if(arr[i] > arr[i+1]){
-				int nextNumber = arr[i+1];
-				arr[i+1] = arr[i];
-				arr[i] = nextNumber;
+				swap(&arr[i+1], &arr[i]);
 				mov = 1;
 			}
 		}
@@ -91,9 +89,7 @@ void selectionSort(int * arr, int len){
 		}
 
 		if(biggerIndex != len - rightPosition +1){
-			int lastNumber = arr[len - rightPosition];
-			arr[len - rightPosition++] = arr[biggerIndex];
-			arr[biggerIndex] = lastNumber;
+			swap(&arr[len - rightPosition++], &arr[biggerIndex]);
 			mov = 1;
 		}
 	}while(mov == 1);
