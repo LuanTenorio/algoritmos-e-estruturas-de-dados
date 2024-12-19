@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "array.h"
 
 void showArray(int *arr, int len){
 	printf("[");
