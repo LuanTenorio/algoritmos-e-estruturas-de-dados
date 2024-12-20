@@ -1,30 +1,6 @@
 #include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include "../preview/preview.c"
+#include "../array/array.c"
 #define ARRAY_SIZE 6
-
-void swap(int* a, int* b) {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
-int arrayIsSorted(int *arr, int len){
-	for (size_t i = 0; i < len-1; i++)
-		if(arr[i] > arr[i+1]) 
-			return 0;
-	
-	return 1;
-}
-
-void populateRandomIntArray(int *arr, int len){
-	srand(time(NULL));
-	for (size_t i = 0; i < len; i++){
-		int random = rand() % 200;
-		arr[i] = random;
-	}
-}
 
 int testerSort(void(*sortAlgorithm)(int*, int)){
 	for(int i = 0; i < 20; i++){
