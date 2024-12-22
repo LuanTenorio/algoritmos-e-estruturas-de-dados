@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "../array/array.c"
+#include "../array/array.h"
+#include "sort.h"
 #define ARRAY_SIZE 6
 
 int testerSort(void(*sortAlgorithm)(int*, int)){

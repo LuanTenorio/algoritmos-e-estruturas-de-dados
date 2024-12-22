@@ -18,7 +18,7 @@ void swap(int* a, int* b) {
 }
 
 int arrayIsSorted(int *arr, int len){
-	for (size_t i = 0; i < len-1; i++)
+	for (int i = 0; i < len-1; i++)
 		if(arr[i] > arr[i+1]) 
 			return 0;
 	
@@ -27,7 +27,7 @@ int arrayIsSorted(int *arr, int len){
 
 void populateRandomIntArray(int *arr, int len){
 	srand(time(NULL));
-	for (size_t i = 0; i < len; i++){
+	for (int i = 0; i < len; i++){
 		int random = rand() % 200;
 		arr[i] = random;
 	}

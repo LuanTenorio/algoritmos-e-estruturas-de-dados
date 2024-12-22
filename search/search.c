@@ -1,9 +1,9 @@
 #include <stdio.h>
+#include "../array/array.h"
 #include "search.h"
-#include "../array/array.c"
 
 int linearSearch(Array *arr, int element){
-    for (size_t i = 0; i < arr->length; i++){
+    for (int i = 0; i < arr->length; i++){
         if(arr->data[i] == element) return i;
     }
     
@@ -51,9 +51,9 @@ int main(){
     Array arr = {arrData, 7};
     showArray(arr.data, arr.length);
 
-    for (size_t i = 1; i <= 7; i++){
-        printf("The position of %ld is %d\n", i, recursiveBinarySearch(&arr, i, 0, arr.length-1));
-        printf("The position of %ld is %d\n", i, binarySearch(&arr, i));
+    for (int i = 1; i <= 7; i++){
+        printf("The position of %d is %d\n", i, recursiveBinarySearch(&arr, i, 0, arr.length-1));
+        printf("The position of %d is %d\n", i, binarySearch(&arr, i));
     }
     
     return 0;

@@ -1,3 +1,5 @@
+#ifndef SORT_H
+#define SORT_H
 
 void bubbleSort(int * arr, int len);
 void selectionSort(int * arr, int len);
@@ -6,3 +8,5 @@ void checkAllSort();
 int testerSort(void(*sortAlgorithm)(int*, int));
 int testerForRecursiveSort(void(*sortAlgorithm)(int*, int, int));
 int partition(int arr[], int low, int high);
+
+#endif
