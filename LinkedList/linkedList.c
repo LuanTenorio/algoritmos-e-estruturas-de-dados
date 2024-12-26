@@ -104,3 +104,51 @@ void showList(LinkedList *list){
 
     printf("]\n");
 }
+
+Node *selectNodeForDelete(LinkedList *list, unsigned int index){
+    if(index == list->len -1){
+         return getNode(list, index);
+    }
+
+    Node *previousNode = getNode(list, index-1);
+    Node *node = previousNode->nextNode;
+    setNextNode(previousNode, node->nextNode); 
+
+    return node;
+}
+
+void deleteNode(LinkedList *list, unsigned int index){
+    if(!list->len) return;
+
+    Node *node = selectNodeForDelete(list, index);
+
+    if(!node) return;
+
+    if(index == 0 && node->nextNode)
+        list->head = node->nextNode;
+
+    list->len--;
+    free(node);
+}
+
+void pop(LinkedList *list){
+    deleteNode(list, list->len-1);
+}
+
+void deleteAllNodes(LinkedList *list){
+    Node *node = list->head;
+
+    while(node){
+        Node *next = node->nextNode;
+
+        free(node);
+
+        node = next;
+    }
+}
+
+void deleteLinkedList(LinkedList *list){
+    deleteAllNodes(list);
+
+    free(list);
+}

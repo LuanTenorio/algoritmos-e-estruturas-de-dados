@@ -22,3 +22,8 @@ Node *getLastNode(LinkedList *list);
 // void insertNode(LinkedList *list, int data, unsigned int index);
 void addNode(LinkedList *list, int data, unsigned int index);
 void showList(LinkedList *list);
+// Node *selectNodeForDelete(LinkedList *list, unsigned int *index);
+void deleteNode(LinkedList *list, unsigned int index);
+void pop(LinkedList *list);
+// void deleteAllNodes(LinkedList *list);
+void deleteLinkedList(LinkedList *list);

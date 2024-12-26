@@ -12,5 +12,10 @@ int main(){
         showList(list);
     }
 
+    deleteNode(list, 1);
+    showList(list);
+    deleteNode(list, 7);
+    showList(list);
+
     return 0;
 }
