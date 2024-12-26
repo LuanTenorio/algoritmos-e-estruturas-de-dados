@@ -29,12 +29,14 @@ Node *createNodeWithNextNode(int data, Node *next){
 }
 
 void AddNodeAtBegin(LinkedList *list, int data){
-    Node *node = createNode(data);
+    Node *node;
 
     if(list->len)
-        createNodeWithNextNode(data, list->head);
+        node = createNodeWithNextNode(data, list->head);
     else
-        list->head = node;
+        node = createNode(data);
+    
+    list->head = node;
     
     list->len++;
 }
@@ -106,19 +108,23 @@ void showList(LinkedList *list){
 }
 
 Node *selectNodeForDelete(LinkedList *list, unsigned int index){
-    if(index == list->len -1){
+    if(index == 0){
          return getNode(list, index);
     }
 
     Node *previousNode = getNode(list, index-1);
     Node *node = previousNode->nextNode;
-    setNextNode(previousNode, node->nextNode); 
+    if(index != list->len -1){
+        setNextNode(previousNode, node->nextNode); 
+    }else{
+        previousNode->nextNode = NULL;
+    }
 
     return node;
 }
 
 void deleteNode(LinkedList *list, unsigned int index){
-    if(!list->len) return;
+    if(index+1 > list->len) return;
 
     Node *node = selectNodeForDelete(list, index);
 
