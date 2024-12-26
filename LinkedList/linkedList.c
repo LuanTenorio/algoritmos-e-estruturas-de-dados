@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
-LinkedList createLinkedList(){
-    LinkedList list = { NULL, 0 };
+LinkedList *createLinkedList(){
+    LinkedList *list = malloc(sizeof(LinkedList));
+    list->head = NULL;
+    list->len = 0;
     return list;
 }
 
@@ -40,7 +42,12 @@ void AddNodeAtBegin(LinkedList *list, int data){
 void appendNode(LinkedList *list, int data){
     Node *lastNode = getLastNode(list);
     Node *node = createNode(data);
-    setNextNode(lastNode, node);
+
+    if(lastNode)
+        setNextNode(lastNode, node);
+    else
+        list->head = node;
+    
     list->len++;
 }
 
@@ -54,11 +61,10 @@ Node *getNode(LinkedList *list, unsigned int index){
 
         return curNode;
     }
-
 }
 
 Node *getLastNode(LinkedList *list){
-    return getNode(list, list->len);
+    return getNode(list, list->len -1);
 }
 
 // depends on addNode checking
@@ -81,3 +87,20 @@ void addNode(LinkedList *list, int data, unsigned int index){
         insertNode(list, data, index);
 }
 
+void showList(LinkedList *list){
+    printf("[");
+
+    if(!list->len){
+        printf("]\n");
+        return;
+    }
+
+    Node *node = list->head;
+
+    while(node){
+        printf("%d,", node->data);
+        node = node->nextNode;
+    }
+
+    printf("]\n");
+}
